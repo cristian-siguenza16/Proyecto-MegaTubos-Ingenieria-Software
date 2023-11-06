@@ -17,7 +17,7 @@ namespace Proyecto_MegaTubos
             string server = "localhost";
             string user = "root";
             string psw = "Cralsive1620";
-            string database = "libreria";
+            string database = "megatubos";
             string cadena = "server=" + server + ";user=" + user + ";pwd=" + psw + ";database=" + database + ";Sslmode=none;";
             MySqlConnection myCon = new MySqlConnection(cadena);
             try

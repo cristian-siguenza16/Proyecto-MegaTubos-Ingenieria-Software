@@ -34,6 +34,7 @@ namespace Proyecto_MegaTubos
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCotizar = new System.Windows.Forms.Button();
             this.cbFerreteria = new System.Windows.Forms.ComboBox();
             this.rtbDescripcion = new System.Windows.Forms.RichTextBox();
             this.lbTotal = new System.Windows.Forms.Label();
@@ -99,6 +100,7 @@ namespace Proyecto_MegaTubos
             this.label26 = new System.Windows.Forms.Label();
             this.tbProductoEliminar = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.tbNIT = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbInsertar.SuspendLayout();
@@ -173,6 +175,8 @@ namespace Proyecto_MegaTubos
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbNIT);
+            this.groupBox1.Controls.Add(this.btnCotizar);
             this.groupBox1.Controls.Add(this.cbFerreteria);
             this.groupBox1.Controls.Add(this.rtbDescripcion);
             this.groupBox1.Controls.Add(this.lbTotal);
@@ -199,6 +203,20 @@ namespace Proyecto_MegaTubos
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agregar";
             // 
+            // btnCotizar
+            // 
+            this.btnCotizar.BackColor = System.Drawing.Color.White;
+            this.btnCotizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCotizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCotizar.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCotizar.Location = new System.Drawing.Point(180, 623);
+            this.btnCotizar.Name = "btnCotizar";
+            this.btnCotizar.Size = new System.Drawing.Size(133, 30);
+            this.btnCotizar.TabIndex = 59;
+            this.btnCotizar.Text = "Cotizar";
+            this.btnCotizar.UseVisualStyleBackColor = false;
+            this.btnCotizar.Click += new System.EventHandler(this.btnCotizar_Click);
+            // 
             // cbFerreteria
             // 
             this.cbFerreteria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -207,7 +225,7 @@ namespace Proyecto_MegaTubos
             this.cbFerreteria.Location = new System.Drawing.Point(486, 132);
             this.cbFerreteria.Name = "cbFerreteria";
             this.cbFerreteria.Size = new System.Drawing.Size(236, 26);
-            this.cbFerreteria.TabIndex = 55;
+            this.cbFerreteria.TabIndex = 53;
             // 
             // rtbDescripcion
             // 
@@ -217,7 +235,7 @@ namespace Proyecto_MegaTubos
             this.rtbDescripcion.Location = new System.Drawing.Point(123, 167);
             this.rtbDescripcion.Name = "rtbDescripcion";
             this.rtbDescripcion.Size = new System.Drawing.Size(599, 67);
-            this.rtbDescripcion.TabIndex = 56;
+            this.rtbDescripcion.TabIndex = 54;
             this.rtbDescripcion.Text = "";
             // 
             // lbTotal
@@ -227,7 +245,7 @@ namespace Proyecto_MegaTubos
             this.lbTotal.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotal.Location = new System.Drawing.Point(573, 617);
             this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(113, 28);
+            this.lbTotal.Size = new System.Drawing.Size(109, 27);
             this.lbTotal.TabIndex = 22;
             this.lbTotal.Text = "Total Q 0";
             // 
@@ -261,7 +279,7 @@ namespace Proyecto_MegaTubos
             this.dtpFecha.Location = new System.Drawing.Point(387, 85);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(335, 26);
-            this.dtpFecha.TabIndex = 53;
+            this.dtpFecha.TabIndex = 101;
             // 
             // label7
             // 
@@ -317,7 +335,7 @@ namespace Proyecto_MegaTubos
             this.tbNombreCliente.Location = new System.Drawing.Point(123, 130);
             this.tbNombreCliente.Name = "tbNombreCliente";
             this.tbNombreCliente.Size = new System.Drawing.Size(264, 26);
-            this.tbNombreCliente.TabIndex = 54;
+            this.tbNombreCliente.TabIndex = 52;
             this.tbNombreCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNombreCliente_KeyPress);
             // 
             // label5
@@ -335,11 +353,11 @@ namespace Proyecto_MegaTubos
             // 
             this.tbIdVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbIdVenta.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbIdVenta.Location = new System.Drawing.Point(387, 38);
+            this.tbIdVenta.Location = new System.Drawing.Point(387, 42);
             this.tbIdVenta.Name = "tbIdVenta";
             this.tbIdVenta.ReadOnly = true;
             this.tbIdVenta.Size = new System.Drawing.Size(146, 26);
-            this.tbIdVenta.TabIndex = 51;
+            this.tbIdVenta.TabIndex = 99;
             // 
             // label2
             // 
@@ -347,22 +365,23 @@ namespace Proyecto_MegaTubos
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(28, 93);
+            this.label2.Location = new System.Drawing.Point(79, 89);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 18);
+            this.label2.Size = new System.Drawing.Size(29, 18);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Cliente ID";
+            this.label2.Text = "NIT";
             // 
             // tbIdCliente
             // 
             this.tbIdCliente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbIdCliente.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbIdCliente.Location = new System.Drawing.Point(123, 90);
+            this.tbIdCliente.Location = new System.Drawing.Point(615, 42);
             this.tbIdCliente.Name = "tbIdCliente";
             this.tbIdCliente.ReadOnly = true;
-            this.tbIdCliente.Size = new System.Drawing.Size(157, 26);
-            this.tbIdCliente.TabIndex = 52;
+            this.tbIdCliente.Size = new System.Drawing.Size(107, 26);
+            this.tbIdCliente.TabIndex = 100;
+            this.tbIdCliente.Visible = false;
             // 
             // label1
             // 
@@ -383,7 +402,7 @@ namespace Proyecto_MegaTubos
             this.tbIdVendedor.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbIdVendedor.Location = new System.Drawing.Point(123, 42);
             this.tbIdVendedor.Name = "tbIdVendedor";
-            this.tbIdVendedor.Size = new System.Drawing.Size(157, 26);
+            this.tbIdVendedor.Size = new System.Drawing.Size(148, 26);
             this.tbIdVendedor.TabIndex = 50;
             // 
             // btnCancelarP
@@ -393,9 +412,9 @@ namespace Proyecto_MegaTubos
             this.btnCancelarP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelarP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelarP.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarP.Location = new System.Drawing.Point(283, 620);
+            this.btnCancelarP.Location = new System.Drawing.Point(346, 623);
             this.btnCancelarP.Name = "btnCancelarP";
-            this.btnCancelarP.Size = new System.Drawing.Size(164, 30);
+            this.btnCancelarP.Size = new System.Drawing.Size(134, 30);
             this.btnCancelarP.TabIndex = 58;
             this.btnCancelarP.Text = "Cancelar";
             this.btnCancelarP.UseVisualStyleBackColor = false;
@@ -407,11 +426,11 @@ namespace Proyecto_MegaTubos
             this.btnGuardarP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardarP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarP.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarP.Location = new System.Drawing.Point(56, 620);
+            this.btnGuardarP.Location = new System.Drawing.Point(15, 623);
             this.btnGuardarP.Name = "btnGuardarP";
-            this.btnGuardarP.Size = new System.Drawing.Size(164, 30);
+            this.btnGuardarP.Size = new System.Drawing.Size(133, 30);
             this.btnGuardarP.TabIndex = 57;
-            this.btnGuardarP.Text = "Guardar";
+            this.btnGuardarP.Text = "Facturar";
             this.btnGuardarP.UseVisualStyleBackColor = false;
             this.btnGuardarP.Click += new System.EventHandler(this.btnGuardarP_Click);
             // 
@@ -946,6 +965,17 @@ namespace Proyecto_MegaTubos
             this.dataGridView2.TabIndex = 37;
             this.dataGridView2.Visible = false;
             // 
+            // tbNIT
+            // 
+            this.tbNIT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbNIT.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbNIT.Location = new System.Drawing.Point(123, 85);
+            this.tbNIT.Name = "tbNIT";
+            this.tbNIT.Size = new System.Drawing.Size(148, 26);
+            this.tbNIT.TabIndex = 51;
+            this.tbNIT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNIT_KeyPress);
+            // 
             // Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1051,5 +1081,7 @@ namespace Proyecto_MegaTubos
         private System.Windows.Forms.NumericUpDown nupCantidadInsertar;
         private System.Windows.Forms.NumericUpDown nupCantidadModificar;
         private System.Windows.Forms.ComboBox cbFerreteria;
+        private System.Windows.Forms.Button btnCotizar;
+        private System.Windows.Forms.TextBox tbNIT;
     }
 }

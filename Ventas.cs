@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Proyecto_MegaTubos
         private DataTable tablaVentas;
         private decimal total = 0;
         private string totaltexto = "0";
+        private bool cotizar = false;
         public Ventas()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace Proyecto_MegaTubos
             InitializeComponent();
             this.myCon = conex;
             crearTabla();
+            actualizar_factura();
             gbEliminar.Visible = false;
             gbInsertar.Visible = false;
             gbModificar.Visible = false;
@@ -52,6 +55,7 @@ namespace Proyecto_MegaTubos
 
         private void calcularTotal()
         {
+            actualizar_factura();
             total = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -228,6 +232,7 @@ namespace Proyecto_MegaTubos
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
+            actualizar_factura();
             gbInsertar.Show();
             gbInsertar.BringToFront();
             btnInsertar.Enabled = false;
@@ -238,6 +243,7 @@ namespace Proyecto_MegaTubos
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            actualizar_factura();
             gbModificar.Show();
             gbModificar.BringToFront();
             btnInsertar.Enabled = false;
@@ -248,6 +254,7 @@ namespace Proyecto_MegaTubos
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            actualizar_factura();
             gbEliminar.Show();
             gbEliminar.BringToFront();
             btnInsertar.Enabled = false;
@@ -532,7 +539,8 @@ namespace Proyecto_MegaTubos
 
         private void btnGuardarP_Click(object sender, EventArgs e)
         {
-           
+            actualizar_factura();
+
                 string fecha = dtpFecha.Value.ToString("yyyy/MM/dd");
             if (!string.IsNullOrWhiteSpace(rtbDescripcion.Text) && !string.IsNullOrWhiteSpace(cbFerreteria.Text) && !string.IsNullOrWhiteSpace(tbIdVendedor.Text) && tablaVentas.Rows.Count != 0)
             {
@@ -562,7 +570,16 @@ namespace Proyecto_MegaTubos
                     transaccion.Commit();           // confirmar transaccion
                     //myCon.Close();
                     conectarSalida();
-                    insertarDetalle_de_Salida(fecha);
+                    insertarDetalle_de_Salida(fecha); 
+
+                    // IMPRIMIR FACTURA O COTIZACION, DEPENDE DEL CASO
+
+                    PrintDocument printDocument1 = new PrintDocument();
+                    PrinterSettings ps = new PrinterSettings();
+                    printDocument1.PrinterSettings = ps;
+                    printDocument1.PrintPage += ImprimirFactura;
+                    printDocument1.Print();
+
 
                     tablaVentas.Rows.Clear();
                     dataGridView1.DataSource = tablaVentas;
@@ -587,6 +604,30 @@ namespace Proyecto_MegaTubos
                 MessageBox.Show("Es obligatorio llenar todos los campos y/o agregar producto");
             }
         }
+        private void btnCotizar_Click(object sender, EventArgs e)
+        {
+            cotizar = true;
+            // IMPRIMIR FACTURA O COTIZACION, DEPENDE DEL CASO
+
+            PrintDocument printDocument1 = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            printDocument1.PrinterSettings = ps;
+            printDocument1.PrintPage += ImprimirFactura;
+            printDocument1.Print();
+
+
+            tablaVentas.Rows.Clear();
+            dataGridView1.DataSource = tablaVentas;
+            lbTotal.Text = "Total Q 0";
+            totaltexto = "0";
+            tbIdVendedor.Clear();
+            tbIdVenta.Clear();
+            tbIdCliente.Clear();
+            tbNombreCliente.Clear();
+            cbFerreteria.Items.Clear();
+            cbFerreteria.Text = "";
+            rtbDescripcion.Clear();
+        }
 
         private void btnCancelarP_Click(object sender, EventArgs e)
         {
@@ -601,6 +642,119 @@ namespace Proyecto_MegaTubos
             cbFerreteria.Items.Clear();
             cbFerreteria.Text = "";
             rtbDescripcion.Clear();
+        }
+
+        private void ImprimirFactura(object sender, PrintPageEventArgs e)
+        {
+            Font font = new Font("Arial", 12);
+            string fecha = dtpFecha.Value.ToString("yyyy/MM/dd");
+            int ancho = 421;
+            int y = 20;
+            if (cotizar)
+            {
+                e.Graphics.DrawString("-------------------------- MEGATUBOS --------------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
+                e.Graphics.DrawString("OLINTEPEQUE, QUETZALTENANGO", font, Brushes.Black, new Rectangle(50, y += 40, ancho, 20));
+                e.Graphics.DrawString("Fecha: " + fecha, font, Brushes.Black, new Rectangle(2, y += 40, ancho, 20));
+                e.Graphics.DrawString("Factura No. COTIZACION", font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("Ferreteria: " + cbFerreteria.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("Direccion: Ciudad", font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("Nombre: " + tbNombreCliente.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("NIT: " + tbNIT.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("-------------------------- PRODUCTOS --------------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
+                e.Graphics.DrawString("CANT------", font, Brushes.Black, new Rectangle(0, y += 20, 55, 20));
+                e.Graphics.DrawString("DESCRIPCION-----------------------------", font, Brushes.Black, new Rectangle(60, y, 350, 20));
+                e.Graphics.DrawString("P/U---------------------", font, Brushes.Black, new Rectangle(351, y, 60, 20));
+                foreach (DataRow row in tablaVentas.Rows)
+                {
+                    e.Graphics.DrawString(row["Cantidad"].ToString(), font, Brushes.Black, new Rectangle(2, y += 20, 55, 20));
+                    e.Graphics.DrawString(row["Descripcion de Producto"].ToString(), font, Brushes.Black, new Rectangle(60, y, 350, 20));
+                    e.Graphics.DrawString("Q " + row["Precio Unitario"].ToString(), font, Brushes.Black, new Rectangle(351, y, 60, 20));
+                }
+                e.Graphics.DrawString("TOTAL A PAGAR Q" + totaltexto, font, Brushes.Black, new Rectangle(170, y += 60, ancho, 20));
+
+
+                e.Graphics.DrawString("Agradecemos su preferencia", font, Brushes.Black, new Rectangle(100, y += 40, ancho, 20));
+                cotizar = false;
+            }
+            else
+            {
+                e.Graphics.DrawString("----------------------- MEGATUBOS -----------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
+                e.Graphics.DrawString("OLINTEPEQUE, QUETZALTENANGO", font, Brushes.Black, new Rectangle(50, y += 40, ancho, 20));
+                e.Graphics.DrawString("Fecha: " + fecha, font, Brushes.Black, new Rectangle(2, y += 40, ancho, 20));
+                e.Graphics.DrawString("Factura No." + tbIdVenta.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("Ferreteria: " + cbFerreteria.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("Direccion: Ciudad", font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("Nombre: " + tbNombreCliente.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("NIT: " + tbNIT.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
+                e.Graphics.DrawString("----------------------- PRODUCTOS -----------------------", font, Brushes.Black, new Rectangle(0, y += 40, ancho, 20));
+                e.Graphics.DrawString("CANT", font, Brushes.Black, new Rectangle(1, y += 20, 25, 20));
+                e.Graphics.DrawString("DESCRIPCION", font, Brushes.Black, new Rectangle(30, y, 350, 20));
+                e.Graphics.DrawString("SUB-TOTAL", font, Brushes.Black, new Rectangle(320, y, 100, 20));
+                foreach (DataRow row in tablaVentas.Rows)
+                {
+                    e.Graphics.DrawString(row["Cantidad"].ToString(), font, Brushes.Black, new Rectangle(2, y += 20, 25, 20));
+                    e.Graphics.DrawString(row["Descripcion de Producto"].ToString(), font, Brushes.Black, new Rectangle(30, y, 350, 20));
+                    e.Graphics.DrawString("Q " + row["Precio Unitario"].ToString(), font, Brushes.Black, new Rectangle(320, y, 100, 20));
+                }
+                e.Graphics.DrawString("TOTAL A PAGAR Q" + totaltexto, font, Brushes.Black, new Rectangle(170, y += 60, ancho, 20));
+
+
+                e.Graphics.DrawString("Agradecemos su preferencia", font, Brushes.Black, new Rectangle(100, y += 40, ancho, 20));
+            }
+        }
+
+        private void tbNIT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                if (tbNIT.Text != "CF" || tbNIT.Text != "cf")
+                {
+                    cbFerreteria.Items.Clear();
+                    string idCliente = "";
+                    string nombre = "";
+                    conectarClienteyFerreteria();
+                    foreach (DataGridViewRow row2 in dataGridView2.Rows)
+                    {
+                        if (Convert.ToString(row2.Cells["NIT"].Value) == tbNIT.Text && !string.IsNullOrWhiteSpace(tbNIT.Text))
+                        {   
+
+                            idCliente = Convert.ToString(row2.Cells["idCliente"].Value);
+                            nombre = Convert.ToString(row2.Cells["Nombre"].Value);
+                            break;
+                        }
+                    }
+                    conectarClienteyFerreteria();
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        if (Convert.ToString(row.Cells["Cliente_idCliente"].Value) == idCliente && !string.IsNullOrWhiteSpace(idCliente))
+                        {
+                            cbFerreteria.Items.Add(Convert.ToString(row.Cells["Nombre_Ferreteria"].Value));
+                            cbFerreteria.SelectedIndex = 0;
+                        }
+                    }
+
+                    cbFerreteria.Focus();
+                    tbIdCliente.Text = idCliente;
+                    tbNombreCliente.Text = nombre;
+                }
+            }
+        }
+
+        private void actualizar_factura()
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = myCon;
+            comando.CommandText = ("SELECT ID FROM megatubos.salidas getLastRecord ORDER BY id DESC LIMIT 1;");
+
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader.GetString("id")) + 1;
+                tbIdVenta.Text = id.ToString();
+            }
+            myCon.Close();
+            myCon.Open();
         }
         //final 
     }
