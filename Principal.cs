@@ -45,6 +45,7 @@ namespace Proyecto_MegaTubos
             btnProducto.Enabled = false;
             btnVendedor.Enabled = false;
             btnHistorialVentas.Enabled = false;
+            btnGraficas.Enabled = false;
 
 
             if(tipo == "Vendedor")
@@ -60,6 +61,7 @@ namespace Proyecto_MegaTubos
                 btnProducto.Enabled = true;
                 btnVendedor.Enabled = true;
                 btnHistorialVentas.Enabled = true;
+                btnGraficas.Enabled = true;
             }
 
         }
@@ -89,6 +91,10 @@ namespace Proyecto_MegaTubos
                 else if(nombre == "Historial")
                 {
                     formulario = new Historial(myCon);
+                }
+                else if (nombre == "Graficas")
+                {
+                    formulario = new Graficas(myCon);
                 }
                 formulario.TopLevel = false;
                 formulario.FormBorderStyle = FormBorderStyle.None;
@@ -138,6 +144,10 @@ namespace Proyecto_MegaTubos
             {
                 btnHistorialVentas.BackColor = Color.FromArgb(40, 40, 40);
             }
+            if (Application.OpenForms["Graficas"] == null)
+            {
+                btnGraficas.BackColor = Color.FromArgb(40, 40, 40);
+            }
         }
 
         private void btnCliente_Click(object sender, EventArgs e)
@@ -169,6 +179,13 @@ namespace Proyecto_MegaTubos
         private void Principal_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnGraficas_Click(object sender, EventArgs e)
+        {
+            // historial ventas
+            abrirFormulario<Graficas>("Graficas");
+            btnGraficas.BackColor = Color.FromArgb(80, 80, 80);
         }
     }
 }

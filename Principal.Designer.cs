@@ -42,6 +42,7 @@ namespace Proyecto_MegaTubos
             this.labelPosicion = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnGraficas = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -52,6 +53,7 @@ namespace Proyecto_MegaTubos
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panel1.Controls.Add(this.btnGraficas);
             this.panel1.Controls.Add(this.btnHistorialVentas);
             this.panel1.Controls.Add(this.btnAgregarVenta);
             this.panel1.Controls.Add(this.btnVendedor);
@@ -243,6 +245,26 @@ namespace Proyecto_MegaTubos
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // btnGraficas
+            // 
+            this.btnGraficas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGraficas.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnGraficas.FlatAppearance.BorderSize = 0;
+            this.btnGraficas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnGraficas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnGraficas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGraficas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraficas.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.btnGraficas.Image = global::Proyecto_MegaTubos.Properties.Resources.chart;
+            this.btnGraficas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraficas.Location = new System.Drawing.Point(0, 535);
+            this.btnGraficas.Name = "btnGraficas";
+            this.btnGraficas.Size = new System.Drawing.Size(348, 60);
+            this.btnGraficas.TabIndex = 5;
+            this.btnGraficas.Text = "GRAFICAS";
+            this.btnGraficas.UseVisualStyleBackColor = true;
+            this.btnGraficas.Click += new System.EventHandler(this.btnGraficas_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -282,5 +304,6 @@ namespace Proyecto_MegaTubos
         private System.Windows.Forms.Button btnAgregarVenta;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnGraficas;
     }
 }

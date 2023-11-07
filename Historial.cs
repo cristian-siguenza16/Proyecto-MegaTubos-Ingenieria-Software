@@ -88,14 +88,14 @@ namespace Proyecto_MegaTubos
                     transaccion = myCon.BeginTransaction(IsolationLevel.Serializable); // nivel de aislamiento
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = myCon;
-                    comando.CommandText = ("SELECT ID, Descripcion, Fecha, Producto_Codigo, CantidadVendida, Sub_Total, Total, Ferreteria, vendedor.Nombre as Vendedor, cliente.Nombre as Cliente  FROM megatubos.detalle_de_salida " +
+                    comando.CommandText = ("SELECT ID, Descripcion, salidas.Fecha, Producto_Codigo, CantidadVendida, Sub_Total, Total, Ferreteria, vendedor.Nombre as Vendedor, cliente.Nombre as Cliente  FROM megatubos.detalle_de_salida " +
                     "INNER JOIN megatubos.salidas " +
                     "ON megatubos.detalle_de_salida.Salidas_ID = megatubos.salidas.ID " +
                     "INNER JOIN megatubos.cliente " +
                     "ON megatubos.salidas.Cliente_idCliente = megatubos.cliente.idCliente " +
                     "INNER JOIN megatubos.vendedor " +
-                    "ON megatubos.salidas.Vendedor_idVendedor = megatubos.vendedor.idVendedor" +
-                    "WHERE (salidas.eliminada = 0 and ID = '" + tbBuscar.Text + "');");
+                    "ON megatubos.salidas.Vendedor_idVendedor = megatubos.vendedor.idVendedor " +
+                    "WHERE (salidas.eliminada = 0 and salidas.ID = " + tbBuscar.Text + ");");
 
                     comando.Transaction = transaccion; // comando tipo transaccion
                     MySqlDataAdapter adaptador = new MySqlDataAdapter();
@@ -124,14 +124,14 @@ namespace Proyecto_MegaTubos
                     transaccion = myCon.BeginTransaction(IsolationLevel.Serializable);  // nivel de aislamiento
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = myCon;
-                    comando.CommandText = ("SELECT ID, Descripcion, Fecha, Producto_Codigo, CantidadVendida, Sub_Total, Total, Ferreteria, vendedor.Nombre as Vendedor, cliente.Nombre as Cliente  FROM megatubos.detalle_de_salida " +
+                    comando.CommandText = ("SELECT ID, Descripcion, salidas.Fecha, Producto_Codigo, CantidadVendida, Sub_Total, Total, Ferreteria, vendedor.Nombre as Vendedor, cliente.Nombre as Cliente  FROM megatubos.detalle_de_salida " +
                     "INNER JOIN megatubos.salidas " +
                     "ON megatubos.detalle_de_salida.Salidas_ID = megatubos.salidas.ID " +
                     "INNER JOIN megatubos.cliente " +
                     "ON megatubos.salidas.Cliente_idCliente = megatubos.cliente.idCliente " +
                     "INNER JOIN megatubos.vendedor " +
-                    "ON megatubos.salidas.Vendedor_idVendedor = megatubos.vendedor.idVendedor" +
-                    "WHERE (salidas.eliminada = 0 and Fecha = '" + tbBuscar.Text + "');");
+                    "ON megatubos.salidas.Vendedor_idVendedor = megatubos.vendedor.idVendedor " +
+                    "WHERE (salidas.eliminada = 0 and salidas.Fecha = '" + tbBuscar.Text + "');");
 
                     comando.Transaction = transaccion;          // comando tipo transaccion
                     MySqlDataAdapter adaptador = new MySqlDataAdapter();
@@ -160,13 +160,13 @@ namespace Proyecto_MegaTubos
                     transaccion = myCon.BeginTransaction(IsolationLevel.Serializable); // nivel de aislamiento
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = myCon;
-                    comando.CommandText = ("SELECT ID, Descripcion, Fecha, Producto_Codigo, CantidadVendida, Sub_Total, Total, Ferreteria, vendedor.Nombre as Vendedor, cliente.Nombre as Cliente  FROM megatubos.detalle_de_salida " +
+                    comando.CommandText = ("SELECT ID, Descripcion, salidas.Fecha, Producto_Codigo, CantidadVendida, Sub_Total, Total, Ferreteria, vendedor.Nombre as Vendedor, cliente.Nombre as Cliente  FROM megatubos.detalle_de_salida " +
                     "INNER JOIN megatubos.salidas " +
                     "ON megatubos.detalle_de_salida.Salidas_ID = megatubos.salidas.ID " +
                     "INNER JOIN megatubos.cliente " +
                     "ON megatubos.salidas.Cliente_idCliente = megatubos.cliente.idCliente " +
                     "INNER JOIN megatubos.vendedor " +
-                    "ON megatubos.salidas.Vendedor_idVendedor = megatubos.vendedor.idVendedor" +
+                    "ON megatubos.salidas.Vendedor_idVendedor = megatubos.vendedor.idVendedor " +
                     "WHERE (salidas.eliminada = 0 and Ferreteria = '" + tbBuscar.Text + "');");
 
                     comando.Transaction = transaccion;          // comando tipo transaccion

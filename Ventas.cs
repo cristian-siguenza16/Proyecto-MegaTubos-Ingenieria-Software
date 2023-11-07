@@ -653,7 +653,7 @@ namespace Proyecto_MegaTubos
             if (cotizar)
             {
                 e.Graphics.DrawString("-------------------------- MEGATUBOS --------------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
-                e.Graphics.DrawString("OLINTEPEQUE, QUETZALTENANGO", font, Brushes.Black, new Rectangle(50, y += 40, ancho, 20));
+                e.Graphics.DrawString("QUETZALTENANGO", font, Brushes.Black, new Rectangle(75, y += 40, ancho, 20));
                 e.Graphics.DrawString("Fecha: " + fecha, font, Brushes.Black, new Rectangle(2, y += 40, ancho, 20));
                 e.Graphics.DrawString("Factura No. COTIZACION", font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("Ferreteria: " + cbFerreteria.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
@@ -661,9 +661,9 @@ namespace Proyecto_MegaTubos
                 e.Graphics.DrawString("Nombre: " + tbNombreCliente.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("NIT: " + tbNIT.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("-------------------------- PRODUCTOS --------------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
-                e.Graphics.DrawString("CANT------", font, Brushes.Black, new Rectangle(0, y += 20, 55, 20));
-                e.Graphics.DrawString("DESCRIPCION-----------------------------", font, Brushes.Black, new Rectangle(60, y, 350, 20));
-                e.Graphics.DrawString("P/U---------------------", font, Brushes.Black, new Rectangle(351, y, 60, 20));
+                e.Graphics.DrawString("CANT", font, Brushes.Black, new Rectangle(0, y += 20, 55, 20));
+                e.Graphics.DrawString("DESCRIPCION", font, Brushes.Black, new Rectangle(60, y, 350, 20));
+                e.Graphics.DrawString("P/U", font, Brushes.Black, new Rectangle(351, y, 60, 20));
                 foreach (DataRow row in tablaVentas.Rows)
                 {
                     e.Graphics.DrawString(row["Cantidad"].ToString(), font, Brushes.Black, new Rectangle(2, y += 20, 55, 20));
@@ -679,22 +679,22 @@ namespace Proyecto_MegaTubos
             else
             {
                 e.Graphics.DrawString("----------------------- MEGATUBOS -----------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
-                e.Graphics.DrawString("OLINTEPEQUE, QUETZALTENANGO", font, Brushes.Black, new Rectangle(50, y += 40, ancho, 20));
+                e.Graphics.DrawString("QUETZALTENANGO", font, Brushes.Black, new Rectangle(75, y += 40, ancho, 20));
                 e.Graphics.DrawString("Fecha: " + fecha, font, Brushes.Black, new Rectangle(2, y += 40, ancho, 20));
                 e.Graphics.DrawString("Factura No." + tbIdVenta.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("Ferreteria: " + cbFerreteria.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("Direccion: Ciudad", font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("Nombre: " + tbNombreCliente.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
                 e.Graphics.DrawString("NIT: " + tbNIT.Text, font, Brushes.Black, new Rectangle(2, y += 20, ancho, 20));
-                e.Graphics.DrawString("----------------------- PRODUCTOS -----------------------", font, Brushes.Black, new Rectangle(0, y += 40, ancho, 20));
-                e.Graphics.DrawString("CANT", font, Brushes.Black, new Rectangle(1, y += 20, 25, 20));
-                e.Graphics.DrawString("DESCRIPCION", font, Brushes.Black, new Rectangle(30, y, 350, 20));
-                e.Graphics.DrawString("SUB-TOTAL", font, Brushes.Black, new Rectangle(320, y, 100, 20));
+                e.Graphics.DrawString("-------------------------- PRODUCTOS --------------------------", font, Brushes.Black, new Rectangle(0, y += 20, ancho, 20));
+                e.Graphics.DrawString("CANT", font, Brushes.Black, new Rectangle(0, y += 20, 55, 20));
+                e.Graphics.DrawString("DESCRIPCION", font, Brushes.Black, new Rectangle(60, y, 350, 20));
+                e.Graphics.DrawString("P/U", font, Brushes.Black, new Rectangle(351, y, 60, 20));
                 foreach (DataRow row in tablaVentas.Rows)
                 {
-                    e.Graphics.DrawString(row["Cantidad"].ToString(), font, Brushes.Black, new Rectangle(2, y += 20, 25, 20));
-                    e.Graphics.DrawString(row["Descripcion de Producto"].ToString(), font, Brushes.Black, new Rectangle(30, y, 350, 20));
-                    e.Graphics.DrawString("Q " + row["Precio Unitario"].ToString(), font, Brushes.Black, new Rectangle(320, y, 100, 20));
+                    e.Graphics.DrawString(row["Cantidad"].ToString(), font, Brushes.Black, new Rectangle(2, y += 20, 55, 20));
+                    e.Graphics.DrawString(row["Descripcion de Producto"].ToString(), font, Brushes.Black, new Rectangle(60, y, 350, 20));
+                    e.Graphics.DrawString("Q " + row["Precio Unitario"].ToString(), font, Brushes.Black, new Rectangle(351, y, 60, 20));
                 }
                 e.Graphics.DrawString("TOTAL A PAGAR Q" + totaltexto, font, Brushes.Black, new Rectangle(170, y += 60, ancho, 20));
 
