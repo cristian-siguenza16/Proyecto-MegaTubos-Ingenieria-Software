@@ -588,6 +588,7 @@ namespace Proyecto_MegaTubos
                     tbIdVendedor.Clear();
                     tbIdVenta.Clear();
                     tbIdCliente.Clear();
+                    tbNIT.Clear();
                     tbNombreCliente.Clear();
                     cbFerreteria.Items.Clear();
                     cbFerreteria.Text = "";
@@ -623,6 +624,7 @@ namespace Proyecto_MegaTubos
             tbIdVendedor.Clear();
             tbIdVenta.Clear();
             tbIdCliente.Clear();
+            tbNIT.Clear();
             tbNombreCliente.Clear();
             cbFerreteria.Items.Clear();
             cbFerreteria.Text = "";
@@ -638,6 +640,7 @@ namespace Proyecto_MegaTubos
             tbIdVendedor.Clear();
             tbIdVenta.Clear();
             tbIdCliente.Clear();
+            tbNIT.Clear();
             tbNombreCliente.Clear();
             cbFerreteria.Items.Clear();
             cbFerreteria.Text = "";

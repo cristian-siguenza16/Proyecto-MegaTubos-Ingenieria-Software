@@ -47,12 +47,20 @@ namespace Proyecto_MegaTubos
             btnHistorialVentas.Enabled = false;
             btnGraficas.Enabled = false;
 
+            btnAgregarVenta.Visible = false;
+            btnCliente.Visible = false;
+            btnProducto.Visible = false;
+            btnVendedor.Visible = false;
+            btnHistorialVentas.Visible = false;
+            btnGraficas.Visible = false;
 
-            if(tipo == "Vendedor")
+            if (tipo == "Vendedor")
             {
                 btnAgregarVenta.Enabled = true;
                 btnCliente.Enabled = true;
-                btnVendedor.Enabled = true;
+
+                btnAgregarVenta.Visible = true;
+                btnCliente.Visible = true;
             }
             else if (labelPosicion.Text == "Admin" || labelPosicion.Text == "Gerente")
             {
@@ -62,6 +70,13 @@ namespace Proyecto_MegaTubos
                 btnVendedor.Enabled = true;
                 btnHistorialVentas.Enabled = true;
                 btnGraficas.Enabled = true;
+
+                btnAgregarVenta.Visible = true;
+                btnCliente.Visible = true;
+                btnProducto.Visible = true;
+                btnVendedor.Visible = true;
+                btnHistorialVentas.Visible = true;
+                btnGraficas.Visible = true;
             }
 
         }
